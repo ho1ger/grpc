@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+package calc;
+
+service Calcer {
+	rpc Add (CalcRequest) returns (CalcReply);
+
+	rpc Subtract (CalcRequest) returns (CalcReply);
+
+	rpc Multiply (CalcRequest) returns (CalcReply);
+
+	rpc Divide (CalcRequest) returns (CalcReplyF);
+
+  rpc MultiPlus (stream Digits) returns (CalcReply);
+
+  rpc InteractiveMultiPlus (stream Digits) returns (stream CalcReply);
+
+  rpc HashFile (FileRequest) returns (HashResponse);
+}
+
+message FileRequest {
+  bytes file = 1;
+}
+
+message HashResponse {
+  string hash = 1;
+}
+
+message CalcRequest {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message CalcReply {
+  int32 c = 1;
+}
+
+message CalcReplyF {
+  float c = 1;
+}
+
+message Digits {
+  int32 a = 1;
+  int32 counter = 2;
+}
